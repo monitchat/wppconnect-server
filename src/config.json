@@ -1,5 +1,5 @@
 {
-  "secretKey": "THISISMYSECURETOKEN",
+  "secretKey": "e6fc0034-9a45-4038-a3cf-14f9b99f8d02",
   "host": "http://localhost",
   "port": "21465",
   "deviceName": "WppConnect",
@@ -9,15 +9,15 @@
   "maxListeners": 15,
   "customUserDataDir": "./userDataDir/",
   "webhook": {
-    "url": null,
+    "url": "https://api-dev2.monitchat.com/api/v1/wppconnect",
     "autoDownload": true,
     "uploadS3": false,
     "readMessage": true,
-    "allUnreadOnStart": false,
+  "allUnreadOnStart": false,
     "listenAcks": true,
-    "onPresenceChanged": true,
-    "onParticipantsChanged": true,
-    "onReactionMessage": true
+    "onPresenceChanged": false,
+    "onParticipantsChanged": false,
+    "onReactionMessage": false
   },
   "archive": {
     "enable": false,
@@ -26,7 +26,10 @@
   },
   "log": {
     "level": "error",
-    "logger": ["console", "file"]
+    "logger": [
+      "console",
+      "file"
+    ]
   },
   "createOptions": {
     "browserArgs": [
