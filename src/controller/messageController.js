@@ -44,27 +44,7 @@ export async function sendMessage(req, res) {
 }
 
 export async function sendImage(req, res) {
-  const { phone, filename = 'image-api.jpg', caption, path } = req.body;
-
-  if (!path && !req.file)
-    return res.status(401).send({
-      message: 'Sending the file is mandatory',
-    });
-
-  const pathFile = path || req.file.path;
-
-  try {
-    let results = [];
-    for (const contato of phone) {
-      results.push(await req.client.sendImage(contato, pathFile, filename, caption));
-    }
-
-    if (results.length === 0) return res.status(400).json('Error sending message');
-    if (req.file) await unlinkAsync(pathFile);
-    returnSucess(res, results);
-  } catch (error) {
-    returnError(req, res, error);
-  }
+  sendFile64(req, res)
 }
 
 export async function sendFile(req, res) {
