@@ -1,0 +1,37 @@
+#cloud-config
+groups:
+  - ubuntu: [root,sys]
+  - wppconnect
+
+# Add users to the system. Users are added after groups are added.
+users:
+  - default
+  - name: wppconnect
+    gecos: wppconnect
+    shell: /bin/bash
+    primary_group: wppconnect
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAnYAOKmtCYlVsv5cD+gvalbT0IjxunFZHXa2/GjqJLMC1+/gSTfxWlVek6Vj27i50EN7ceJ51UHpAvAAeArnp8omw4PzQShAdXjVUWUiunyaHCtWnq07W1su/M1VsgXTS7SPwTPsAaJNUGvXRv+SFc2ZwWMKP6iup0RF/xVIb/yVxYgk65VjtANs18P3+3aYAtssTqLq9qI/yGqJsP5IpfTkWlKUHDyJCJ2XV+6dwWyUkiVhTryWpAgjrEo+FvUPrqowqQUkdZeHt5hxWh4ImVR+Pqp7HCR695aHIlm+nOKXuTYLKFodBW6F5vnxnmUt1jhC0atiaXquV1i11bi5jlQ== rsa-key-20171111
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5c9dV2nnfbWRAvHH3jAn33GbXJPF4SrNvMd0I5NQe8WLLFyYvQqMlmbgQEHvtRvpou6+QfxLfpA4tC4+GtafT5rmZ9bGtlJdHiu9JLBRNwTSN04EnD2gup5PySorObbX29NBRZ43hTIUrOHmM5dbC7aCBS+5Il/uTa/ql/Zy32HxVRPsiQKKSNrP98Jt+DTOr2NXNCSfVqU4Zi3O+XhvfCSQPC0einiwfjTRrJ277OzD7TJK1+yEJOfBqkRhMWdEuY2UtKOn9pLh7h2NLHDrQ/11aA32RAw86MhtrwG+lg1mWStGL19jCSGmwSs5nCi3scDz65cxEJSxLk8jAiT09RRS2yNITyOg0MznQIQnW4GGqe+qiySWK+PY3rCdr8EN7jvgxTYglNjjWl4ylUReU2wXy7pKhXaQgMvaoXQ+9H7V9PDgJo0dGq1a87YL3aHFfQf+utdtmrhe7Fz2EqgM09RX/Yt3CAIf2kGqa2piE0T+XfXVho1vmXIApRYjN40k=
+
+runcmd:
+  - cd /home/wppconnect
+  - sudo apt-get update && sudo apt-get install -y libxshmfence-dev libgbm-dev wget unzip fontconfig locales gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils
+  - wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo apt-get install libappindicator1
+  - sudo dpkg -i google-chrome-stable_current_amd64.deb
+  - sudo rm -rf google-chrome-stable_current_amd64.deb
+  - sudo apt install -y git
+  - sudo git clone https://github.com/monitchat/wppconnect-server.git
+  - sudo chown wppconnect:wppconnect wppconnect-server/ -R
+  - cd wppconnect-server/
+  - sudo apt install -y npm
+  - npm cache clean -f
+  - sudo npm install -g n
+  - sudo n stable
+  - sudo -H -u wppconnect npm install
+  - sudo -H -u wppconnect npm run build
+  - sudo -H -u wppconnect nohup npm start &

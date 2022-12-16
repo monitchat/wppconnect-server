@@ -61,7 +61,7 @@ routes.post(
   upload.single('file'),
   verifyToken,
   statusConnection,
-  MessageController.sendImage
+  MessageController.sendFile
 );
 routes.post(
   '/api/:session/send-sticker',
@@ -85,7 +85,7 @@ routes.post(
   statusConnection,
   MessageController.sendFile
 );
-routes.post('/api/:session/send-file-base64', verifyToken, statusConnection, MessageController.sendFile64);
+routes.post('/api/:session/send-file-base64', verifyToken, statusConnection, MessageController.sendFile);
 routes.post('/api/:session/send-voice', verifyToken, statusConnection, MessageController.sendVoice);
 routes.post('/api/:session/send-voice-base64', verifyToken, statusConnection, MessageController.sendVoice64);
 routes.post('/api/:session/send-status', verifyToken, statusConnection, MessageController.sendStatusText);
@@ -199,6 +199,8 @@ routes.post('/api/:session/temporary-messages', verifyToken, statusConnection, D
 routes.post('/api/:session/typing', verifyToken, statusConnection, DeviceController.setTyping);
 routes.post('/api/:session/recording', verifyToken, statusConnection, DeviceController.setRecording);
 routes.post('/api/:session/star-message', verifyToken, statusConnection, DeviceController.starMessage);
+routes.get('/api/:session/reactions/:id', verifyToken, statusConnection, DeviceController.getReactions);
+routes.get('/api/:session/votes/:id', verifyToken, statusConnection, DeviceController.getVotes);
 routes.post('/api/:session/reject-call', verifyToken, statusConnection, DeviceController.rejectCall);
 
 // Catalog

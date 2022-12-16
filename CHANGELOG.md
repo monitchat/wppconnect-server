@@ -1,3 +1,20 @@
+# 1.8.0 (2022-12-15)
+
+
+
+## 1.7.4 (2022-12-12)
+
+
+### Bug Fixes
+
+* Fixed return undefined on sendListMsg ([eb830ce](https://github.com/wppconnect-team/wppconnect-server/commit/eb830cee97384a0c9a84db8abc0d5f75ea688c86))
+
+
+
+## 1.7.3 (2022-12-03)
+
+
+
 ## 1.7.2 (2022-11-18)
 
 

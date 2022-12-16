@@ -9,7 +9,7 @@
   "maxListeners": 15,
   "customUserDataDir": "./userDataDir/",
   "webhook": {
-    "url": "https://api-dev2.monitchat.com/api/v1/wppconnect",
+    "url": "https://api-v2.monitchat.com/api/v1/wppconnect",
     "autoDownload": true,
     "uploadS3": false,
     "readMessage": false,

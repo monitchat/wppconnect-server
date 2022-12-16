@@ -43,48 +43,25 @@ export async function sendMessage(req, res) {
   }
 }
 
-export async function sendImage(req, res) {
-  sendFile64(req, res)
-}
-
 export async function sendFile(req, res) {
-  const { phone, path, filename = 'file', message } = req.body;
+  const { phone, path, base64, filename = 'file', message, caption } = req.body;
 
-  if (!path && !req.file)
+  if (!path && !req.file && !base64)
     return res.status(401).send({
       message: 'Sending the file is mandatory',
     });
 
-  const pathFile = path || req.file.path;
+  const pathFile = path || base64 || req.file.path;
+  const msg = message || caption;
 
   try {
     let results = [];
     for (const contato of phone) {
-      results.push(await req.client.sendFile(contato, pathFile, filename, message));
+      results.push(await req.client.sendFile(contato, pathFile, { filename: filename, caption: msg }));
     }
 
     if (results.length === 0) return res.status(400).json('Error sending message');
     if (req.file) await unlinkAsync(pathFile);
-    returnSucess(res, results);
-  } catch (error) {
-    returnError(req, res, error);
-  }
-}
-
-export async function sendFile64(req, res) {
-  const { base64, phone, filename } = req.body;
-
-  if (!base64) return res.status(401).send({ message: 'The base64 of the file was not informed' });
-
-  const options = req.body.options || {};
-
-  try {
-    let results = [];
-    for (const contato of phone) {
-      results.push(await req.client.sendFile(contato, base64, Object.keys(options).length > 0 ? options : filename));
-    }
-
-    if (results.length === 0) return res.status(400).json('Error sending message');
     returnSucess(res, results);
   } catch (error) {
     returnError(req, res, error);
@@ -191,7 +168,7 @@ export async function sendListMessage(req, res) {
 
     if (results.length === 0) return returnError(req, res, 'Error sending list buttons');
 
-    returnSucess(res, phone, results);
+    returnSucess(res, results);
   } catch (error) {
     returnError(req, res, error);
   }
