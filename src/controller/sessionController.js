@@ -154,11 +154,14 @@ export async function startSession(req, res) {
 
 export async function closeSession(req, res) {
   const session = req.session;
+  const sessionPath = `${process.cwd()}/userDataDir/${session}`
+  fs.rmSync(sessionPath, { recursive: true, force: true });
   try {
     if (clientsArray[session].status === null) {
+      delete clientsArray[session]
       return await res.status(200).json({ status: true, message: 'Session successfully closed' });
     } else {
-      clientsArray[session] = { status: null };
+      delete clientsArray[session]
       await req.client.close();
 
       req.io.emit('whatsapp-status', false);
