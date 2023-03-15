@@ -206,6 +206,7 @@ routes.post('/api/:session/reject-call', verifyToken, statusConnection, DeviceCo
 // Catalog
 routes.get('/api/:session/get-products', verifyToken, statusConnection, CatalogController.getProducts);
 routes.get('/api/:session/get-product-by-id', verifyToken, statusConnection, CatalogController.getProductById);
+routes.post('/api/:session/add-product', verifyToken, statusConnection, CatalogController.addProduct);
 routes.post('/api/:session/edit-product', verifyToken, statusConnection, CatalogController.editProduct);
 routes.post('/api/:session/del-products', verifyToken, statusConnection, CatalogController.delProducts);
 routes.post('/api/:session/change-product-image', verifyToken, statusConnection, CatalogController.changeProductImage);
@@ -215,6 +216,7 @@ routes.get('/api/:session/get-collections', verifyToken, statusConnection, Catal
 routes.post('/api/:session/create-collection', verifyToken, statusConnection, CatalogController.createCollection);
 routes.post('/api/:session/edit-collection', verifyToken, statusConnection, CatalogController.editCollection);
 routes.post('/api/:session/del-collection', verifyToken, statusConnection, CatalogController.deleteCollection);
+routes.post('/api/:session/send-link-catalog', verifyToken, statusConnection, CatalogController.sendLinkCatalog);
 routes.post(
   '/api/:session/set-product-visibility',
   verifyToken,

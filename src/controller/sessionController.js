@@ -21,6 +21,7 @@ import fs from 'fs';
 import mime from 'mime-types';
 import { version } from '../../package.json';
 import QRCode from 'qrcode';
+import config from '../config.json';
 
 const SessionUtil = new CreateSessionUtil();
 
@@ -154,16 +155,25 @@ export async function startSession(req, res) {
 
 export async function closeSession(req, res) {
   const session = req.session;
-  const sessionPath = `${process.cwd()}/userDataDir/${session}`
+  const sessionPath = `${process.cwd()}/userDataDir/${session}`;
   fs.rmSync(sessionPath, { recursive: true, force: true });
+  const { clearSession = false } = req.body;
   try {
     if (clientsArray[session].status === null) {
-      delete clientsArray[session]
+      delete clientsArray[session];
       return await res.status(200).json({ status: true, message: 'Session successfully closed' });
     } else {
-      delete clientsArray[session]
+      delete clientsArray[session];
       await req.client.close();
 
+      if (clearSession) {
+        let sessionFolder = `${config.customUserDataDir}/${session}`;
+        if (fs.existsSync(sessionFolder)) {
+          console.log('Deletando pasta: ' + sessionFolder);
+          fs.rmdirSync(sessionFolder, { recursive: true });
+        }
+      }
+      await req.client.close();
       req.io.emit('whatsapp-status', false);
       callWebHook(req.client, req, 'closesession', {
         message: `Session: ${session} disconnected`,
