@@ -1,15 +1,15 @@
 variable "location" {
-  default = "nbg1"
+  default = "ash"
 }
 
 variable "instances" {
-  default = "3"
+  default = "1"
 }
 
 variable "server_type" {
-  default = "cx41"
+  default = "cpx21"
 }
 
 variable "os_type" {
-  default = "ubuntu-20.04"
+  default = "docker-ce"
 }
