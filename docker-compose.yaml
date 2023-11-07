@@ -221,7 +221,7 @@ services:
       - "8081:8081"
     networks: 
       wpp-network:
-        ipv4_address: 172.20.0.7
+        ipv4_address: 172.20.0.12
     deploy:
       resources:
         limits:
