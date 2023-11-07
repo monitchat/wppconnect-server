@@ -4,7 +4,7 @@ services:
 
   wppconnect-server-1:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -23,7 +23,7 @@ services:
     
   wppconnect-server-2:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -44,7 +44,7 @@ services:
 
   wppconnect-server-3:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -65,7 +65,7 @@ services:
 
   wppconnect-server-4:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -86,7 +86,7 @@ services:
 
   wppconnect-server-5:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -107,7 +107,7 @@ services:
 
   wppconnect-server-6:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -128,7 +128,7 @@ services:
 
   wppconnect-server-7:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -149,7 +149,7 @@ services:
 
   wppconnect-server-8:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -170,7 +170,7 @@ services:
 
   wppconnect-server-9:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -191,7 +191,7 @@ services:
 
   wppconnect-server-10:
     build: 
-      context: ./wppconnect-server
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     image: wppconnect-server
@@ -212,7 +212,7 @@ services:
   
   wppconnect-nginx:
     build: 
-      context: ./wppconnect-nginx
+      context: ./nginx
       dockerfile: Dockerfile
     container_name: wppconnect-nginx
     hostname: wppconnect-nginx

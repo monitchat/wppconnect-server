@@ -18,6 +18,11 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5c9dV2nnfbWRAvHH3jAn33GbXJPF4SrNvMd0I5NQe8WLLFyYvQqMlmbgQEHvtRvpou6+QfxLfpA4tC4+GtafT5rmZ9bGtlJdHiu9JLBRNwTSN04EnD2gup5PySorObbX29NBRZ43hTIUrOHmM5dbC7aCBS+5Il/uTa/ql/Zy32HxVRPsiQKKSNrP98Jt+DTOr2NXNCSfVqU4Zi3O+XhvfCSQPC0einiwfjTRrJ277OzD7TJK1+yEJOfBqkRhMWdEuY2UtKOn9pLh7h2NLHDrQ/11aA32RAw86MhtrwG+lg1mWStGL19jCSGmwSs5nCi3scDz65cxEJSxLk8jAiT09RRS2yNITyOg0MznQIQnW4GGqe+qiySWK+PY3rCdr8EN7jvgxTYglNjjWl4ylUReU2wXy7pKhXaQgMvaoXQ+9H7V9PDgJo0dGq1a87YL3aHFfQf+utdtmrhe7Fz2EqgM09RX/Yt3CAIf2kGqa2piE0T+XfXVho1vmXIApRYjN40k=
 
 runcmd:
-  - cd /home/wppconnect
-  - sudo git clone https://github.com/monitchat/wppconnect-server.git .
-  - docker-compose up --build
+  - sudo apt install docker-compose
+  - sudo groupadd docker
+  - sudo usermod -aG docker wppconnect
+  - sudo su - wppconnect
+  - cd /home/wppconnect/
+  - git clone https://github.com/monitchat/wppconnect-server.git
+  - cd wppconnect-server/
+  - docker compose up --build

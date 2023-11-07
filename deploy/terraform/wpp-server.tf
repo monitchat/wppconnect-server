@@ -8,4 +8,5 @@ resource "hcloud_server" "wpp-server" {
     type = "web"
   }
   user_data = file("wpp-server.yaml")
+  ssh_keys = [ "rsa-key-20171111" ]
 }
