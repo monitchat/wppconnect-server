@@ -12,7 +12,15 @@ resource "hcloud_server" "wpp-server" {
   firewall_ids = [ 1114609 ]
 
   provisioner "file" {
-    source = "../../.env"
+    source = "${path.root}/../../.env"
     destination = "/tmp/.env"
+
+    connection {
+      type        = "ssh"
+      user        = "root"
+      private_key = file("/home/ricardoperovano/keys/windows_openssh")
+      host        = "${self.ipv4_address}"
+    }
+
   }
 }
