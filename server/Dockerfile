@@ -1,7 +1,12 @@
 # Estágio de construção (build)
 FROM node:lts-alpine3.18 as base
 WORKDIR /usr/src
-ENV NODE_ENV=production PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true PORT=21465
+
+ENV NODE_ENV=production \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    SECRET_KEY=$SECRET_KEY \
+    WEBHOOK_URL=$WEBHOOK_URL \
+    SERVER_PORT=$SERVER_PORT
 
 # Instale as dependências necessárias
 RUN apk add --no-cache git
@@ -35,7 +40,7 @@ RUN yarn cache clean
 COPY --from=build /usr/src/wpp-server/ /usr/src/wpp-server/
 
 # Exponha a porta necessária
-EXPOSE 21465
+EXPOSE $SERVER_PORT
 
 # Comando de entrada
 ENTRYPOINT ["node", "dist/server.js"]

@@ -9,4 +9,10 @@ resource "hcloud_server" "wpp-server" {
   }
   user_data = file("wpp-server.yaml")
   ssh_keys = [ "rsa-key-20171111" ]
+  firewall_ids = [ 1114609 ]
+
+  provisioner "file" {
+    source = "../../.env"
+    destination = "/tmp/.env"
+  }
 }

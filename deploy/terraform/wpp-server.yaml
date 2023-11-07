@@ -24,5 +24,6 @@ runcmd:
   - sudo su - wppconnect
   - cd /home/wppconnect/
   - git clone https://github.com/monitchat/wppconnect-server.git
+  - sudo cp /tmp/.env /home/wppconnect/wppconnect-server
   - cd wppconnect-server/
   - docker compose up --build
