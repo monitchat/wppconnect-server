@@ -105,111 +105,6 @@ services:
     depends_on:
       - wppconnect-server-4
 
-  wppconnect-server-6:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    restart: always
-    image: wppconnect-server
-    container_name: wppconnect-server-6
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.7
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-5
-
-  wppconnect-server-7:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    restart: always
-    image: wppconnect-server
-    container_name: wppconnect-server-7
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.8
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-6
-
-  wppconnect-server-8:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    restart: always
-    image: wppconnect-server
-    container_name: wppconnect-server-8
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.9
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-7
-
-  wppconnect-server-9:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    restart: always
-    image: wppconnect-server
-    container_name: wppconnect-server-9
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.10
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-8
-
-  wppconnect-server-10:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    restart: always
-    image: wppconnect-server
-    container_name: wppconnect-server-10
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.11
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-9
-  
   wppconnect-nginx:
     build: 
       context: ./nginx
@@ -221,7 +116,7 @@ services:
       - "8081:8081"
     networks: 
       wpp-network:
-        ipv4_address: 172.20.0.12
+        ipv4_address: 172.20.0.15
     deploy:
       resources:
         limits:
@@ -234,11 +129,6 @@ services:
       - wppconnect-server-3
       - wppconnect-server-4
       - wppconnect-server-5
-      - wppconnect-server-6
-      - wppconnect-server-7
-      - wppconnect-server-8
-      - wppconnect-server-9
-      - wppconnect-server-10
 
 networks: 
   wpp-network:

@@ -3,7 +3,7 @@ variable "location" {
 }
 
 variable "instances" {
-  default = "1"
+  default = "5"
 }
 
 variable "server_type" {
