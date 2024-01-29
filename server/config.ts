@@ -3,7 +3,7 @@ export default {
   host: 'http://localhost',
   port: process.env.SERVER_PORT,
   deviceName: 'Monitchat',
-  poweredBy: 'Vipphone Softwares',
+  poweredBy: 'Monitchat-Server',
   startAllSession: true,
   tokenStoreType: 'file',
   maxListeners: 15,

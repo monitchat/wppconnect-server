@@ -43,4 +43,4 @@ COPY --from=build /usr/src/wpp-server/ /usr/src/wpp-server/
 EXPOSE $SERVER_PORT
 
 # Comando de entrada
-ENTRYPOINT ["node", "dist/server.js"]
+CMD ["node", "--max-old-space-size=4096" ,"dist/server.js"]

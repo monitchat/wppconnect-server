@@ -81,59 +81,59 @@ services:
     depends_on:
       - wppconnect-server-2
 
-  wppconnect-server-4:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    environment:
-      - SECRET_KEY=$SECRET_KEY
-      - WEBHOOK_URL=$WEBHOOK_URL
-      - SERVER_PORT=$SERVER_PORT
-    restart: always
-    env_file:
-      - .env
-    image: wppconnect-server
-    container_name: wppconnect-server-4
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.5
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-3
+    wppconnect-server-4:
+      build: 
+        context: ./server
+        dockerfile: Dockerfile
+      environment:
+        - SECRET_KEY=$SECRET_KEY
+        - WEBHOOK_URL=$WEBHOOK_URL
+        - SERVER_PORT=$SERVER_PORT
+      restart: always
+      env_file:
+        - .env
+      image: wppconnect-server
+      container_name: wppconnect-server-4
+      hostname: wppconnect-server
+      networks: 
+        wpp-network:
+          ipv4_address: 172.20.0.5
+      tty: true
+      deploy:
+        resources:
+          limits:
+            memory: 500M
+          reservations:
+            memory: 200M
+      depends_on:
+        - wppconnect-server-3
 
-  wppconnect-server-5:
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    environment:
-      - SECRET_KEY=$SECRET_KEY
-      - WEBHOOK_URL=$WEBHOOK_URL
-      - SERVER_PORT=$SERVER_PORT
-    restart: always
-    env_file:
-      - .env
-    image: wppconnect-server
-    container_name: wppconnect-server-5
-    hostname: wppconnect-server
-    networks: 
-      wpp-network:
-        ipv4_address: 172.20.0.6
-    tty: true
-    deploy:
-      resources:
-        limits:
-          memory: 500M
-        reservations:
-          memory: 200M
-    depends_on:
-      - wppconnect-server-4
+    wppconnect-server-5:
+      build: 
+        context: ./server
+        dockerfile: Dockerfile
+      environment:
+        - SECRET_KEY=$SECRET_KEY
+        - WEBHOOK_URL=$WEBHOOK_URL
+        - SERVER_PORT=$SERVER_PORT
+      restart: always
+      env_file:
+        - .env
+      image: wppconnect-server
+      container_name: wppconnect-server-5
+      hostname: wppconnect-server
+      networks: 
+        wpp-network:
+          ipv4_address: 172.20.0.6
+      tty: true
+      deploy:
+        resources:
+          limits:
+            memory: 500M
+          reservations:
+            memory: 200M
+      depends_on:
+        - wppconnect-server-4
 
   wppconnect-nginx:
     build: 
