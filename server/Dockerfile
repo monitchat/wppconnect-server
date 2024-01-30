@@ -1,46 +1,31 @@
-# Estágio de construção (build)
 FROM node:lts-alpine3.18 as base
-WORKDIR /usr/src
-
+WORKDIR /usr/src/wpp-server
 ENV NODE_ENV=production \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     SECRET_KEY=$SECRET_KEY \
     WEBHOOK_URL=$WEBHOOK_URL \
-    SERVER_PORT=$SERVER_PORT
+    SERVER_PORT=$SERVER_PORT \
+    POWERED_BY=$POWERED_BY
 
-# Instale as dependências necessárias
-RUN apk add --no-cache git
+COPY package.json ./
+RUN yarn install --production --pure-lockfile && \
+    yarn cache clean
 
-# Clone o repositório do GitHub
-RUN git clone https://github.com/wppconnect-team/wppconnect-server.git /usr/src/wpp-server
-WORKDIR /usr/src/wpp-server
-
-# Instale as dependências e limpe o cache
-RUN yarn install --production --pure-lockfile && yarn cache clean
-
-# Estágio de compilação (build)
 FROM base as build
 WORKDIR /usr/src/wpp-server
-COPY config.ts /usr/src/wpp-server/src
-
-RUN yarn install --production=false --pure-lockfile && yarn cache clean
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+COPY package.json  ./
+RUN yarn install --production=false --pure-lockfile && \
+    yarn cache clean
+COPY . .
 RUN yarn build
 
-# Estágio final
+
 FROM base
-WORKDIR /usr/src/wpp-server
-
-# Instale o Chromium (se necessário)
+WORKDIR /usr/src/wpp-server/
 RUN apk add --no-cache chromium
-
-# Limpe o cache do Yarn
 RUN yarn cache clean
-
-# Copie o código compilado do estágio de construção
+COPY . .
 COPY --from=build /usr/src/wpp-server/ /usr/src/wpp-server/
-
-# Exponha a porta necessária
-EXPOSE $SERVER_PORT
-
-# Comando de entrada
+EXPOSE 21465
 CMD ["node", "--max-old-space-size=4096" ,"dist/server.js"]
