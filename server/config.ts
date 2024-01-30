@@ -1,7 +1,7 @@
 export default {
-  secretKey: process.env.SECRET_KEY,
+  secretKey: "e6fc0034-9a45-4038-a3cf-14f9b99f8d02",
   host: 'http://localhost',
-  port: process.env.SERVER_PORT,
+  port: "21465",
   deviceName: 'Monitchat',
   poweredBy: 'Monitchat-Server',
   startAllSession: true,
@@ -9,7 +9,7 @@ export default {
   maxListeners: 15,
   customUserDataDir: './userDataDir/',
   webhook: {
-    url: process.env.WEBHOOK_URL,
+    url: "https://api-v2.monitchat.com/api/v1/wppconnect",
     autoDownload: true,
     uploadS3: false,
     readMessage: true,
