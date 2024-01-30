@@ -109,6 +109,7 @@ export function initServer(serverOptions: any) {
   });
 
   http.listen(PORT, () => {
+    logger.info(process.env['SECRET_KEY'])
     logger.info(`Server is running on port: ${PORT}`);
     logger.info(
       `\x1b[31m Visit ${serverOptions.host}:${PORT}/api-docs for Swagger docs`

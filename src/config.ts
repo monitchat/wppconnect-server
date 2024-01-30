@@ -1,15 +1,15 @@
 export default {
-  secretKey: process.env.SECRET_KEY,
+  secretKey: process.env['SECRET_KEY'],
   host: 'http://localhost',
   port: '21465',
   deviceName: 'WppConnect',
-  poweredBy: process.env.POWERED_BY,
+  poweredBy: process.env['POWERED_BY'],
   startAllSession: true,
   tokenStoreType: 'file',
   maxListeners: 15,
   customUserDataDir: './userDataDir/',
   webhook: {
-    url: process.env.WEBHOOK_URL,
+    url: process.env['WEBHOOK_URL'],
     autoDownload: true,
     uploadS3: false,
     readMessage: true,
