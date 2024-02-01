@@ -5,8 +5,6 @@ services:
     build:
       context: ./
       dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
     deploy:
       resources:
         limits:
@@ -45,8 +43,6 @@ services:
     build:
       context: ./
       dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
     deploy:
       resources:
         limits:
@@ -66,8 +62,6 @@ services:
     build:
       context: ./
       dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
     deploy:
       resources:
         limits:
