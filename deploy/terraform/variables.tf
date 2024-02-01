@@ -7,7 +7,7 @@ variable "instances" {
 }
 
 variable "server_type" {
-  default = "cpx21"
+  default = "cpx31"
 }
 
 variable "os_type" {

@@ -19,12 +19,14 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDkwdxrtsAqKfV7jHEY7KG5ekAWQA2aTNSYQYq2M+dTPMRuQ0DFB9KYWBQdsj7R5GXNwbE+sjDfT3Pe9NfpB30KpLx/kDO/YRFE7DZWkfFZ4cBsSGlLRYCAqsgaBEYIIm3X+LqGFSmW/6U3YRBDo1XGobwmbo07TVL9gmCMHQZUAQ4fyGH/F/4M+0VnnC/YIxkxR/lNVePk2RU+H5cx5FxlsDviCOPdrFgp/2OglUv4P6qI16O4AAxUI3/4ggrVUxtg/gM1Ewhdy+3kgOk3K1mAK4StMXyihnwawuRrDIU9q95un2B0pdWbLhWwJXsBsDkobOb2DA4bDmmZdgXxDFIWZa5RPH+ezCUwC7E53OjRKCALwXziu8TMwqNcfO+FZ8C9noSm/8kRXy50OVGgBriA6uwa2KifOpNeGRl1sLQ96PCcOUGCx/QROxTJ+ES8IamWQFfcMLPMej2YyWWtjBS0Q4yscEpiapYFTU9GS3TNFt8kuYMHcmwPBXcmCAc3s1k= ricardoperovano@Notebook
 
 runcmd:
-  - sudo apt install docker-compose
+  - sudo apt-get update -y
+  - sudo apt install docker-compose -y
   - sudo groupadd docker
   - sudo usermod -aG docker wppconnect
-  - sudo su - wppconnect
   - cd /home/wppconnect/
-  - git clone https://github.com/monitchat/wppconnect-server.git
-  - sudo chown wppconnect:wppconnect /tmp/.env && cp /tmp/.env /home/wppconnect/wppconnect-server
-  - cd wppconnect-server/
-  - docker compose up --build
+  - sudo mkdir wppconnect-server
+  - sudo su - wppconnect
+  - cd wppconnect-server
+  - git clone https://github.com/monitchat/wppconnect-server.git .
+  - sudo chown wppconnect:wppconnect /home/wppconnect/wppconnect-server/ -R
+  - docker-compose --env-file /tmp/.env up -d

@@ -26,8 +26,6 @@ services:
     build:
       context: ./
       dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
     deploy:
       resources:
         limits:
@@ -84,69 +82,6 @@ services:
       - POWERED_BY=$POWERED_BY
     ports:
       - 21468:21465
-
-  wppconnect-5:
-    build:
-      context: ./
-      dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
-    deploy:
-      resources:
-        limits:
-          memory: 1024M
-    volumes:
-      - ./config.ts:/usr/src/wpp-server/config.ts
-    image: wppconnect-server
-    environment:
-      - SECRET_KEY=$SECRET_KEY
-      - WEBHOOK_URL=$WEBHOOK_URL
-      - SERVER_PORT=$SERVER_PORT
-      - POWERED_BY=$POWERED_BY
-    ports:
-      - 21470:21465
-
-  wppconnect-6:
-    build:
-      context: ./
-      dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
-    deploy:
-      resources:
-        limits:
-          memory: 1024M
-    volumes:
-      - ./config.ts:/usr/src/wpp-server/config.ts
-    image: wppconnect-server
-    environment:
-      - SECRET_KEY=$SECRET_KEY
-      - WEBHOOK_URL=$WEBHOOK_URL
-      - SERVER_PORT=$SERVER_PORT
-      - POWERED_BY=$POWERED_BY
-    ports:
-      - 21471:21465
-
-  wppconnect-7:
-    build:
-      context: ./
-      dockerfile: ./server/Dockerfile
-    env_file:
-      - .env
-    deploy:
-      resources:
-        limits:
-          memory: 1024M
-    volumes:
-      - ./config.ts:/usr/src/wpp-server/config.ts
-    image: wppconnect-server
-    environment:
-      - SECRET_KEY=$SECRET_KEY
-      - WEBHOOK_URL=$WEBHOOK_URL
-      - SERVER_PORT=$SERVER_PORT
-      - POWERED_BY=$POWERED_BY
-    ports:
-      - 21472:21465
 
 volumes:
   wppconnect_tokens: {}
