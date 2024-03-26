@@ -9,6 +9,7 @@ ENV NODE_ENV=production \
 
 COPY package.json ./
 RUN yarn install --production --pure-lockfile && \
+    yarn add sharp --ignore-engines && \
     yarn cache clean
 
 FROM base as build
