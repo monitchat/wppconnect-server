@@ -8,6 +8,15 @@ ENV NODE_ENV=production \
     POWERED_BY=$POWERED_BY
 
 COPY package.json ./
+RUN apk update && \
+    apk add --no-cache \
+    vips-dev \
+    fftw-dev \
+    gcc \
+    g++ \
+    make \
+    libc6-compat \
+    && rm -rf /var/cache/apk/*
 RUN yarn install --production --pure-lockfile && \
     yarn add sharp --ignore-engines && \
     yarn cache clean
@@ -16,11 +25,10 @@ FROM base as build
 WORKDIR /usr/src/wpp-server
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 COPY package.json  ./
-RUN yarn install --production=false --pure-lockfile && \
-    yarn cache clean
+RUN yarn install --production=false --pure-lockfile
+RUN yarn cache clean
 COPY . .
 RUN yarn build
-
 
 FROM base
 WORKDIR /usr/src/wpp-server/
